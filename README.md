@@ -1,0 +1,13 @@
+# daily-quote
+
+### How to make my own
+* Clone this repo
+* Make sure head of your working git repo is in gh-page branch
+* Make sure your ssh key is added to ssh-agent and associated to github account
+* Install updater to your crontab at any arbitrary frequency you like
+* That's about it
+
+### How can I change style of the page
+* Modify the template.html. Don't modify the index.html
+* Make sure the `${XXX}` bash substitution string stay its form
+* Feel free to add .js and .css or other funcy business you kids are doing
