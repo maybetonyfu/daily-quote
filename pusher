@@ -28,8 +28,8 @@ eval "cat << EOF | tee index.html >&2
 $(cat ${TEMP_FILE})
 EOF"
 
-# git add -A
+git add -A
 
-# git commit -m "Update content"
+git commit -m "Update content"
 
-# git push origin gh-pages
+git push origin gh-pages
