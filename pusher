@@ -1,0 +1,35 @@
+#!/bin/bash
+
+MASHAPE_KEY=xnZNrG7TZSmshDKSwFaZAMmnqAXvp1sO1XXjsnRBihq7KsGAHI
+
+TEMP_FILE=template.html
+
+COMMIT_MESSAGE='Update Content
+Bug fix
+New Release
+'
+
+COMMIT_FREQUENCY=''
+
+RES_BODY=$(curl -X POST 'https://andruxnet-random-famous-quotes.p.mashape.com/?cat=movies' \
+                -H "X-Mashape-Key: ${MASHAPE_KEY}" \
+                -H 'Content-Type: application/x-www-form-urlencoded' \
+                -H 'Accept: application/json')
+
+QUOTE=$(echo ${RES_BODY} | jq .quote | tr -d '"')
+
+AUTHOR=$(echo ${RES_BODY} | jq .author | tr -d '"')
+
+echo ${QUOTE:? "API Error"}
+
+echo ${AUTHOR:? "API Error"}
+
+eval "cat << EOF | tee index.html >&2
+$(cat ${TEMP_FILE})
+EOF"
+
+# git add -A
+
+# git commit -m "Update content"
+
+# git push origin gh-pages
