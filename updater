@@ -1,6 +1,11 @@
 #!/bin/bash
+# set -e
 
-source config
+EXE_PATH=$(dirname "$(realpath ${0})")
+
+cd ${EXE_PATH} 
+
+source ${EXE_PATH}/config
 
 RES_BODY=$(curl -X POST 'https://andruxnet-random-famous-quotes.p.mashape.com/?cat=movies' \
                 -H "X-Mashape-Key: ${MASHAPE_KEY}" \
