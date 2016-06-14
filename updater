@@ -21,9 +21,9 @@ request_random_quote () {
 }
 
 generate_document () {
-    eval "cat << EOF | tee index.html >&2
-    $(cat ${TEMP_FILE})
-    EOF"
+eval "cat << EOF | tee index.html >&2
+$(cat ${TEMP_FILE})
+EOF"
 }
 
 push_changes () {
