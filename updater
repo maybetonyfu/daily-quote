@@ -5,14 +5,22 @@ cd $(dirname $(realpath ${0}))
 
 source config
 
+test_luck () {
+    local luck=$(($RANDOM%10))
+    if [ "${luck}" -lt "${commit_likeliness}" ]; then
+        echo "Not lucky enough"
+        exit 0
+    fi
+}
+
 request_random_quote () {
-    local res_body=$(curl -X POST 'https://andruxnet-random-famous-quotes.p.mashape.com/?cat=movies' \
+    local respond_body=$(curl -X POST 'https://andruxnet-random-famous-quotes.p.mashape.com/?cat=movies' \
                         -H "X-Mashape-Key: ${mashape_key}" \
                         -H 'Content-Type: application/x-www-form-urlencoded' \
                         -H 'Accept: application/json')
 
-    quote=$(echo ${res_body} | jq .quote | tr -d '"')
-    author=$(echo ${res_body} | jq .author | tr -d '"')
+    quote=$(echo ${respond_body} | jq .quote | tr -d '"')
+    author=$(echo ${respond_body} | jq .author | tr -d '"')
 
     echo ${quote:? "API Error"}
     echo ${author:? "API Error"}
@@ -26,12 +34,13 @@ push_changes () {
     local commit_message_count=${#commit_messages[*]}
     local this_commit=${commit_messages[$((RANDOM%commit_message_count))]}
     echo ${this_commit}
-    git add -A 
+    git add -A
     git commit -m "${this_commit}"
     git push origin gh-pages
 }
 
 main () {
+    test_luck
     request_random_quote
     generate_document
     push_changes

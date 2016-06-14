@@ -1,11 +1,15 @@
+#!/usr/bin/env bash
+
 # Your mashape identity key 
-MASHAPE_KEY=
+mashape_key=M2IxMGIwMTE0ODk0YzA2NDc3YzcwMjc0YTc1YWNkMzRmNGViNmIzMTU1YmQyMTI4ODEzYzE0NzMwYzQ3NGY4MQ==
 
-# A list of random commit message
-COMMIT_MESSAGE='Update Content
-Bug fix
-New Release
-'
+# A list of commit messages being randomly picked every commit
+commit_messages=(
+    'Update Content'
+    'Bug fix'
+    'New Release'
+)
 
-# Frequency for committing code
-COMMIT_FREQUENCY=''
+# The likelihood of proceeding a commit everytime the script being run
+# with 0 being impossible and 10 being certain
+commit_likeliness=7
