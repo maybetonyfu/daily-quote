@@ -1,34 +1,33 @@
 #!/usr/bin/env bash
 set -e
 
-EXE_PATH=$(dirname "$(realpath ${0})")
-
-cd ${EXE_PATH} 
+cd $(dirname $(realpath ${0}))
 
 source config
 
 request_random_quote () {
-    local RES_BODY=$(curl -X POST 'https://andruxnet-random-famous-quotes.p.mashape.com/?cat=movies' \
-                        -H "X-Mashape-Key: ${MASHAPE_KEY}" \
+    local res_body=$(curl -X POST 'https://andruxnet-random-famous-quotes.p.mashape.com/?cat=movies' \
+                        -H "X-Mashape-Key: ${mashape_key}" \
                         -H 'Content-Type: application/x-www-form-urlencoded' \
                         -H 'Accept: application/json')
 
-    QUOTE=$(echo ${RES_BODY} | jq .quote | tr -d '"')
-    AUTHOR=$(echo ${RES_BODY} | jq .author | tr -d '"')
+    quote=$(echo ${res_body} | jq .quote | tr -d '"')
+    author=$(echo ${res_body} | jq .author | tr -d '"')
 
-    echo ${QUOTE:? "API Error"}
-    echo ${AUTHOR:? "API Error"}
+    echo ${quote:? "API Error"}
+    echo ${author:? "API Error"}
 }
 
 generate_document () {
-eval "cat << EOF | tee index.html >&2
-$(cat ${TEMP_FILE})
-EOF"
+    echo $(source template) > index.html
 }
 
 push_changes () {
+    local commit_message_count=${#commit_messages[*]}
+    local this_commit=${commit_messages[$((RANDOM%commit_message_count))]}
+    echo ${this_commit}
     git add -A 
-    git commit -m "Update content"
+    git commit -m "${this_commit}"
     git push origin gh-pages
 }
 

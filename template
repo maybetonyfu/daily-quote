@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+cat << _EOF_
+
+<html>
+<head>
+</head>
+<body>
+<h1> ${quote} </h1>
+<h2> ${author} </h2>
+</body>
+</html>
+
+_EOF_

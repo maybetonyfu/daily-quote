@@ -1,9 +1,6 @@
 # Your mashape identity key 
 MASHAPE_KEY=
 
-# Template html file
-TEMP_FILE=template.html
-
 # A list of random commit message
 COMMIT_MESSAGE='Update Content
 Bug fix
