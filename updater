@@ -1,31 +1,41 @@
-#!/bin/bash
-# set -e
+#!/usr/bin/env bash
+set -e
 
 EXE_PATH=$(dirname "$(realpath ${0})")
 
 cd ${EXE_PATH} 
 
-source ${EXE_PATH}/config
+source config
 
-RES_BODY=$(curl -X POST 'https://andruxnet-random-famous-quotes.p.mashape.com/?cat=movies' \
-                -H "X-Mashape-Key: ${MASHAPE_KEY}" \
-                -H 'Content-Type: application/x-www-form-urlencoded' \
-                -H 'Accept: application/json')
+request_random_quote () {
+    local RES_BODY=$(curl -X POST 'https://andruxnet-random-famous-quotes.p.mashape.com/?cat=movies' \
+                        -H "X-Mashape-Key: ${MASHAPE_KEY}" \
+                        -H 'Content-Type: application/x-www-form-urlencoded' \
+                        -H 'Accept: application/json')
 
-QUOTE=$(echo ${RES_BODY} | jq .quote | tr -d '"')
+    QUOTE=$(echo ${RES_BODY} | jq .quote | tr -d '"')
+    AUTHOR=$(echo ${RES_BODY} | jq .author | tr -d '"')
 
-AUTHOR=$(echo ${RES_BODY} | jq .author | tr -d '"')
+    echo ${QUOTE:? "API Error"}
+    echo ${AUTHOR:? "API Error"}
+}
 
-echo ${QUOTE:? "API Error"}
+generate_document () {
+    eval "cat << EOF | tee index.html >&2
+    $(cat ${TEMP_FILE})
+    EOF"
+}
 
-echo ${AUTHOR:? "API Error"}
+push_changes () {
+    git add -A 
+    git commit -m "Update content"
+    git push origin gh-pages
+}
 
-eval "cat << EOF | tee index.html >&2
-$(cat ${TEMP_FILE})
-EOF"
+main () {
+    request_random_quote
+    generate_document
+    push_changes
+}
 
-git add -A
-
-git commit -m "Update content"
-
-git push origin gh-pages
+main
