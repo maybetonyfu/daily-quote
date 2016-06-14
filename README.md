@@ -2,6 +2,7 @@
 ### What on earth is this thing
 * This is a my mental state digress and resort from my daily grind by reading some random uplifting quotes
 * This is a graceless attempt to make my github profile page looks nice
+* One of the above claims is true
 
 ### How to make my own
 * Clone this repo
