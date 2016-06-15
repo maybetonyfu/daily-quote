@@ -7,7 +7,9 @@ source config
 
 test_luck () {
     local luck=$(($RANDOM%10))
-    if [ "${luck}" -lt "${commit_likeliness}" ]; then
+    echo ${luck}
+    echo ${commit_likeliness}
+    if [ "${luck}" -gt "${commit_likeliness}" ]; then
         echo "Not lucky enough"
         exit 0
     fi
