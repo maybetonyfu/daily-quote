@@ -33,6 +33,8 @@ generate_document () {
 }
 
 push_changes () {
+    eval $(ssh-agent -s)
+    ssh-add mypk
     local commit_message_count=${#commit_messages[*]}
     local this_commit=${commit_messages[$((RANDOM%commit_message_count))]}
     echo ${this_commit}
