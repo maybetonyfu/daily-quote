@@ -22,8 +22,6 @@ fi
 git config --global user.email "tonyfu.dev@gmail.com"
 git config --global user.name "Tony Fu"
 
-
-
 mkdir ${HOME}/.ssh
 touch ${HOME}/.ssh/config
 cat <<EOF | tee ${HOME}/.ssh/config >&2 
