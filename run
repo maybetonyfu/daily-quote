@@ -24,12 +24,12 @@ if [[ ${commit_on_workday} -gt 0 ]]; then
     workday_frequency=$((24/${commit_on_workday}))
     echo ${workday_frequency}
     workday_job="* */${workday_frequency} * * 1-5 $(pwd)/updater 2>&1"
-    cat < (crontab -l) |grep -v "${workday_job}" < (echo "${workday_job}")
+    (crontab -l ; echo "* */${workday_frequency} * * 1-5 $(pwd)/updater 2>&1" 2>&1 | grep -v "no crontab" | sort | uniq | crontab -
 fi
 
 if [[ ${commit_on_weekend} -gt 0 ]]; then
     weekend_frequency=$((24/${commit_on_weekend}))
     echo ${weekend_frequency}
     weekend_job="* */${weekend_frequency} * * 0,6 $(pwd)/updater 2>&1"
-    cat < (crontab -l) |grep -v "${weekend_job}" < (echo "${weekend_job}")
+    (crontab -l ; echo "* */${weekend_frequency} * * 0,6 $(pwd)/updater 2>&1" 2>&1 | grep -v "no crontab" | sort | uniq | crontab -
 fi
