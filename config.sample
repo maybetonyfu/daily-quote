@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Your mashape identity key 
-mashape_key=M2IxMGIwMTE0ODk0YzA2NDc3YzcwMjc0YTc1YWNkMzRmNGViNmIzMTU1YmQyMTI4ODEzYzE0NzMwYzQ3NGY4MQ==
+mashape_key=M2IxMGIwMTE0ODk0YzA2NDc3YzcwMjc0YTc1YWNkMzRmNGViNm
 
 # A list of commit messages being randomly picked every commit
 commit_messages=(
