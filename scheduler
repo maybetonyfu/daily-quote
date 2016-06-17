@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-job="* */2 * * * /bin/bash /home/tonyf/code/playground/gitpusher/updater"
-(crontab -l 2>/dev/null; echo "${job}") | crontab -

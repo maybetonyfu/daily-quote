@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -e
+
+cd $(dirname $(realpath ${0}))
+
+source config
+
+if [[ ${commit_on_workday} -gt 0 ]]; then
+    workday_frequency=$((24/${commit_on_workday}))
+    echo ${workday_frequency}
+    workday_job="* */${workday_frequency} * * 1-5 $(pwd)/updater 2>&1"
+    (crontab -l 2>/dev/null; echo "${workday_job}") | crontab -
+fi
+
+if [[ ${commit_on_weekend} -gt 0 ]]; then
+    weekend_frequency=$((24/${commit_on_weekend}))
+    echo ${weekend_frequency}
+    weekend_job="* */${weekend_frequency} * * 0,6 $(pwd)/updater 2>&1"
+    (crontab -l 2>/dev/null; echo "${weekend_job}") | crontab -
+fi
+
+rsyslogd
+cron
+touch /var/log/cron.log
+tail -F /var/log/syslog /var/log/cron.log
+
