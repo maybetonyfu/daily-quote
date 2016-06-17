@@ -19,8 +19,8 @@ if [[ ${commit_on_weekend} -gt 0 ]]; then
     (crontab -l 2>/dev/null; echo "${weekend_job}") | crontab -
 fi
 
-git config --global user.email "tonyfu.dev@gmail.com"
-git config --global user.name "Tony Fu"
+git config --global user.email ${github_user_email}
+git config --global user.name ${github_user_name}
 
 mkdir ${HOME}/.ssh
 touch ${HOME}/.ssh/config
