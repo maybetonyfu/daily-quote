@@ -5,20 +5,6 @@ cd $(dirname $(realpath ${0}))
 
 source config
 
-if [[ ${commit_on_workday} -gt 0 ]]; then
-    workday_frequency=$((24/${commit_on_workday}))
-    echo ${workday_frequency}
-    workday_job="* */${workday_frequency} * * 1-5 $(pwd)/updater 2>&1"
-    (crontab -l 2>/dev/null; echo "${workday_job}") | crontab -
-fi
-
-if [[ ${commit_on_weekend} -gt 0 ]]; then
-    weekend_frequency=$((24/${commit_on_weekend}))
-    echo ${weekend_frequency}
-    weekend_job="* */${weekend_frequency} * * 0,6 $(pwd)/updater 2>&1"
-    (crontab -l 2>/dev/null; echo "${weekend_job}") | crontab -
-fi
-
 git config --global user.email ${github_user_email}
 git config --global user.name ${github_user_name}
 
@@ -34,3 +20,16 @@ cron
 touch /var/log/cron.log
 tail -F /var/log/syslog /var/log/cron.log
 
+if [[ ${commit_on_workday} -gt 0 ]]; then
+    workday_frequency=$((24/${commit_on_workday}))
+    echo ${workday_frequency}
+    workday_job="* */${workday_frequency} * * 1-5 $(pwd)/updater 2>&1"
+    cat < (crontab -l) |grep -v "${workday_job}" < (echo "${workday_job}")
+fi
+
+if [[ ${commit_on_weekend} -gt 0 ]]; then
+    weekend_frequency=$((24/${commit_on_weekend}))
+    echo ${weekend_frequency}
+    weekend_job="* */${weekend_frequency} * * 0,6 $(pwd)/updater 2>&1"
+    cat < (crontab -l) |grep -v "${weekend_job}" < (echo "${weekend_job}")
+fi
