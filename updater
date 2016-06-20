@@ -37,7 +37,7 @@ push_changes () {
     ssh-add ${github_ssh_key}
     local commit_message_count=${#commit_messages[*]}
     local this_commit=${commit_messages[$((RANDOM%commit_message_count))]}
-    echo ${this_commit}
+    git pull origin gh-pages
     git add -A
     git commit -m "${this_commit}"
     git push origin gh-pages
