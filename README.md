@@ -11,9 +11,9 @@
 
 ### How to make my own ?
 * Fork this repo
-* * `cp config.sample config`
+* Copy the config.sample to a new file named config`cp config.sample config`
 * Create an ssh key pair (or use an exsting one), add the public key to your github account and private key to your repo (The git ignore file will ignore .pri, .key and .epk, if yours is otherwise or doesn't have an extension please change to one of these)
-* Modify the config file, make sure your mashape identity key and github credential are correct
+* Modify the config file, make sure your mashape identity key and github credential are correct (Note: don't modify config.sample. It won't work plus your private info may compromise)
 * `docker build -t daily-quote . && docker run -d --restart always daily-quote`
 
 ### Configuration
