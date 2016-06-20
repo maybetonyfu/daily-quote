@@ -1,2 +1,8 @@
 config
 mypk
+*.pub
+*.pri
+*.key 
+*.bin 
+*.pem  
+*.epk

@@ -16,26 +16,23 @@ Host github.com
 EOF
 
 #write out current crontab
-# crontab -l > cronjobs 
+crontab -l > cronjobs | true 
 
 #echo new cron into cron file
 if [[ ${commit_on_workday} -gt 0 ]]; then
     workday_frequency=$((24/${commit_on_workday}))
     echo ${workday_frequency}
-    #workday_job="* */${workday_frequency} * * 1-5 $(pwd)/updater 2>&1"
     echo "* */${workday_frequency} * * 1-5 $(pwd)/updater 2>&1" >> cronjobs
 fi
 
 if [[ ${commit_on_weekend} -gt 0 ]]; then
     weekend_frequency=$((24/${commit_on_weekend}))
     echo ${weekend_frequency}
-    #weekend_job="* */${weekend_frequency} * * 0,6 $(pwd)/updater 2>&1"
     echo "* */${weekend_frequency} * * 0,6 $(pwd)/updater 2>&1" >> cronjobs
 fi
 
 #install new cron file
 crontab cronjobs
-
 rm cronjobs
 
 rsyslogd
