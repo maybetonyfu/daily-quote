@@ -1,5 +1,5 @@
 # daily-quote
-### What on earth is this thing ?
+### What is this thing ?
 * This is a resort of mental stress from daily grind by reading some random uplifting quotes
 * This is a graceless attempt to make my github profile page looks nice
 * One of the above claims is true
@@ -18,10 +18,10 @@
 
 ### Configuration
 * mashape_key: mashape access key, must use your own
-* category: Categories of quotes. Available opetions: movies/famous
+* category: Categories of quotes. Available options: movies/famous
 * github_user_name:  Your github display name, must use your own
 * github_user_email: Your github email, must use your own
-* github_ssh_key: Your github ssh key, the public key must be installed under your account, must use your own
+* github_ssh_key: File name of your github ssh key, the public key must be installed under your account, must use your own
 * commit_messages: A list of commit messages that will be randomly chosen to commit your updates
 * commit_likeliness: The likelihood of proceeding a commit everytime the script being run, with 0 being impossible and 10 being certain
 * commit_on_workday: The number of times trying to commit in a work day, must be a factor of 12

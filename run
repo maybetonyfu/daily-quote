@@ -25,13 +25,13 @@ crontab -l > cronjobs | true
 if [[ ${commit_on_workday} -gt 0 ]]; then
     workday_frequency=$((24/${commit_on_workday}))
     echo ${workday_frequency}
-    echo "* */${workday_frequency} * * 1-5 $(pwd)/updater 2>&1 >> /tmp/workday_log" >> cronjobs
+    echo "0 */${workday_frequency} * * 1-5 $(pwd)/updater 2>&1 >> /tmp/workday_log" >> cronjobs
 fi
 
 if [[ ${commit_on_weekend} -gt 0 ]]; then
     weekend_frequency=$((24/${commit_on_weekend}))
     echo ${weekend_frequency}
-    echo "* */${weekend_frequency} * * 0,6 $(pwd)/updater 2>&1 >> /tmp/weekend_log" >> cronjobs
+    echo "0 */${weekend_frequency} * * 0,6 $(pwd)/updater 2>&1 >> /tmp/weekend_log" >> cronjobs
 fi
 
 crontab cronjobs
