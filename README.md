@@ -1,6 +1,6 @@
 # daily-quote
 ### What on earth is this thing ?
-* This is a my mental state resort from my mundane grind by reading some random uplifting quotes
+* This is a resort of mental stress from daily grind by reading some random uplifting quotes
 * This is a graceless attempt to make my github profile page looks nice
 * One of the above claims is true
 
@@ -12,13 +12,13 @@
 ### How to make my own ?
 * Fork this repo
 * * `cp config.sample config`
-* Create an ssh key pair (or use an exsting one), add the public key to your github account and public key to this repo (The git ignore file will ignore .pri, .key and .epk, if yours is otherwise or doesn't have an extension please change to one of these)
+* Create an ssh key pair (or use an exsting one), add the public key to your github account and private key to your repo (The git ignore file will ignore .pri, .key and .epk, if yours is otherwise or doesn't have an extension please change to one of these)
 * Modify the config file, make sure your mashape identity key and github credential are correct
-* `docker build -t dayly-updater . && docker run -d --restart always daily-updater`
+* `docker build -t daily-quote . && docker run -d --restart always daily-quote`
 
 ### Configuration
 * mashape_key: mashape access key, must use your own
-* category: Categories of quotes. Available: movies/famous
+* category: Categories of quotes. Available opetions: movies/famous
 * github_user_name:  Your github display name, must use your own
 * github_user_email: Your github email, must use your own
 * github_ssh_key: Your github ssh key, the public key must be installed under your account, must use your own
@@ -28,7 +28,7 @@
 * commit_on_weekend: The number of times trying to commit in a weekend, must be a factor of 12
 
 
-### How can I change style of the page
+### How can I change style of the page ?
 * Modify the `template` file. Don't modify the `index.html`, your changes won't be persisted
 * Make sure the `${XXX}` bash substitution string stay its form
 * Feel free to add .js and .css or other funky business you kids are doing nowadays

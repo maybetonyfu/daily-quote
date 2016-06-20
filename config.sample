@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Your mashape identity key 
-mashape_key=M2IxMGIwMTE0ODk0YzA2NDc3YzcwMjc0YTc1YWNkMzRmNGViNm
+mashape_key="M2IxMGIwMTE0ODk0YzA2NDc3YzcwMjc0YTc1YWNkMzRmNGViNm"
 
 # Categories of quotes. Available: movies/famous
-category=movies
+category="movies"
 
 # A list of commit messages being randomly picked every commit
 commit_messages=(
@@ -27,5 +27,4 @@ github_user_name="John Doe"
 
 github_user_email="john.doe@github.com"
 
-github_ssh_key="mypk"
-
+github_ssh_key="mypk.key"

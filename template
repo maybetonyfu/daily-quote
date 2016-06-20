@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+#
+# HTML template for index.html
+
 cat << _EOF_
 <html>
     <head>

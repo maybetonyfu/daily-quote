@@ -1,10 +1,24 @@
 #!/usr/bin/env bash
+#
+# Update new content to index.html. Will be invoked by crond every given time interval
+
 set -e
 
 cd $(dirname $(realpath ${0}))
 
 source config
 
+#######################################
+# Generate a random number from 0 to 10
+# If random number < 10 - likeliness
+# then exit
+# Globals:
+#   commit_likeliness
+# Arguments:
+#   None
+# Returns:
+#   None
+#######################################
 test_luck () {
     local luck=$(($RANDOM%10))
     echo ${luck}
@@ -15,6 +29,16 @@ test_luck () {
     fi
 }
 
+#######################################
+# Request random quote API from mashape
+# Globals:
+#   quote
+#   author
+# Arguments:
+#   None
+# Returns:
+#   None
+#######################################
 request_random_quote () {
     local respond_body=$(curl -X POST "https://andruxnet-random-famous-quotes.p.mashape.com/?cat=${category}" \
                         -H "X-Mashape-Key: ${mashape_key}" \
@@ -28,10 +52,29 @@ request_random_quote () {
     echo ${author:? "API Error"}
 }
 
+#######################################
+# Write template into index.html
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   None
+#######################################
 generate_document () {
     echo $(source template) > index.html
 }
 
+#######################################
+# Write template into index.html
+# Globals:
+#   github_ssh_key
+#   commit_messages
+# Arguments:
+#   None
+# Returns:
+#   None
+#######################################
 push_changes () {
     eval $(ssh-agent -s)
     ssh-add ${github_ssh_key}
@@ -43,6 +86,16 @@ push_changes () {
     git push origin gh-pages
 }
 
+#######################################
+# main function. define the order of 
+# each function when executed
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   None
+#######################################
 main () {
     test_luck
     request_random_quote
