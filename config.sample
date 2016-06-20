@@ -13,3 +13,13 @@ commit_messages=(
 # The likelihood of proceeding a commit everytime the script being run
 # with 0 being impossible and 10 being certain
 commit_likeliness=7
+
+#how many times try to commit a day
+commit_on_workday=12
+
+commit_on_weekend=2
+
+# Github Indentity
+github_user_name="John Doe"
+
+github_user_email="john.doe@github.com"
