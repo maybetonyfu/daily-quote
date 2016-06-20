@@ -1,18 +1,31 @@
 # daily-quote
-### What on earth is this thing
+### What on earth is this thing ?
 * This is a my mental state resort from my mundane grind by reading some random uplifting quotes
 * This is a graceless attempt to make my github profile page looks nice
 * One of the above claims is true
 
-### How to make my own
-* Clone this repo
-* Register an account at https://market.mashape.com/
-* Copy the config.sample to config
-* Add your mashape itentity key as the value of `mashape_key` variable in config
-* `chmod +x updater`
-* Make sure head of your working git repo is in gh-page branch
-* Make sure your ssh key is added to ssh-agent and associated to github account
-* Install updater to your crontab at any arbitrary frequency you like
+### What do I need ?
+* github account (duh)
+* mashape account https://www.mashape.com/ to access public API
+* docker installed on a local machine
+
+### How to make my own ?
+* Fork this repo
+* * `cp config.sample config`
+* Create an ssh key pair (or use an exsting one), add the public key to your github account and public key to this repo (The git ignore file will ignore .pri, .key and .epk, if yours is otherwise or doesn't have an extension please change to one of these)
+* Modify the config file, make sure your mashape identity key and github credential are correct
+* `docker build -t dayly-updater . && docker run -d --restart always daily-updater`
+
+### Configuration
+* mashape_key: mashape access key, must use your own
+* github_user_name:  Your github display name, must use your own
+* github_user_email: Your github email, must use your own
+* github_ssh_key: Your github ssh key, the public key must be installed under your account, must use your own
+* commit_messages: A list of commit messages that will be randomly chosen to commit your updates
+* commit_likeliness: The likelihood of proceeding a commit everytime the script being run, with 0 being impossible and 10 being certain
+* commit_on_workday: The number of times trying to commit in a work day, must be a factor of 12
+* commit_on_weekend: The number of times trying to commit in a weekend, must be a factor of 12
+
 
 ### How can I change style of the page
 * Modify the `template` file. Don't modify the `index.html`, your changes won't be persisted
