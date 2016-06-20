@@ -18,6 +18,7 @@
 
 ### Configuration
 * mashape_key: mashape access key, must use your own
+* category: Categories of quotes. Available: movies/famous
 * github_user_name:  Your github display name, must use your own
 * github_user_email: Your github email, must use your own
 * github_ssh_key: Your github ssh key, the public key must be installed under your account, must use your own
