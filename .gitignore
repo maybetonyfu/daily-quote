@@ -6,3 +6,4 @@ mypk
 *.bin 
 *.pem  
 *.epk
+*log
