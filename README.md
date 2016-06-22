@@ -24,8 +24,8 @@
 * github_ssh_key: File name of your github ssh key, the public key must be installed under your account, must use your own
 * commit_messages: A list of commit messages that will be randomly chosen to commit your updates
 * commit_likeliness: The likelihood of proceeding a commit everytime the script being run, with 0 being impossible and 10 being certain
-* commit_on_workday: The number of times trying to commit in a work day, must be a factor of 12
-* commit_on_weekend: The number of times trying to commit in a weekend, must be a factor of 12
+* commit_on_workday: The number of times trying to commit in a work day, must be a factor of 24 
+* commit_on_weekend: The number of times trying to commit in a weekend, must be a factor of 24
 
 
 ### How can I change style of the page ?
