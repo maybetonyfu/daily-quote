@@ -8,34 +8,50 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 
 source config
 
+#######################################
+# Install cronjobs
+# then exit
+# Globals:
+#   commit_on_workday
+#   commit_on_weekend
+# Arguments:
+#   None
+# Returns:
+#   None
+#######################################
+function install_cronjobs {
+    if [[ ${commit_on_workday} -gt 0 ]]; then
+        workday_frequency=$((24/${commit_on_workday}))
+        echo ${workday_frequency}
+        echo "0 */${workday_frequency} * * 1-5 $(pwd)/updater 2>&1 >> $(pwd)/workday.log" >> cronjobs
+    fi
+
+    if [[ ${commit_on_weekend} -gt 0 ]]; then
+        weekend_frequency=$((24/${commit_on_weekend}))
+        echo ${weekend_frequency}
+        echo "0 */${weekend_frequency} * * 0,6 $(pwd)/updater 2>&1 >> $(pwd)/weekend.log" >> cronjobs
+    fi
+
+    crontab cronjobs
+    rm cronjobs
+}
+
+# This is actually quite dangerous. but due to the nature of cron
+# It is hard to build a generic solution
+declare -i number_cronjobs=$(crontab -l | wc -l)
+if [[ ${number_cronjobs} = 0 ]]; then
+    install_cronjobs
+fi
+
 git config --global user.email ${github_user_email}
 git config --global user.name ${github_user_name}
 
 # Add github.com to knownhosts so it wont prompt when git push
-mkdir ${HOME}/.ssh
-touch ${HOME}/.ssh/config
-cat <<EOF | tee ${HOME}/.ssh/config >&2 
+test -d ${HOME}/.ssh || mkdir ${HOME}/.ssh
+cat <<EOF | tee ${HOME}/.ssh/config >&2
 Host github.com
     StrictHostKeyChecking no
 EOF
-
-# Install cronjobs
-crontab -l > cronjobs | true 
-
-if [[ ${commit_on_workday} -gt 0 ]]; then
-    workday_frequency=$((24/${commit_on_workday}))
-    echo ${workday_frequency}
-    echo "0 */${workday_frequency} * * 1-5 $(pwd)/updater 2>&1 >> $(pwd)/workday.log" >> cronjobs
-fi
-
-if [[ ${commit_on_weekend} -gt 0 ]]; then
-    weekend_frequency=$((24/${commit_on_weekend}))
-    echo ${weekend_frequency}
-    echo "0 */${weekend_frequency} * * 0,6 $(pwd)/updater 2>&1 >> $(pwd)/weekend.log" >> cronjobs
-fi
-
-crontab cronjobs
-rm cronjobs
 
 # Start crond and log everything
 rsyslogd
