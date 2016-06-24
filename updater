@@ -21,12 +21,11 @@ source config
 #######################################
 test_luck () {
     local luck=$(($RANDOM%10))
-    echo ${luck}
-    echo ${commit_likeliness}
     if [ "${luck}" -lt "$((10-$commit_likeliness))" ]; then
         echo "Not lucky enough"
         exit 0
     fi
+    echo "Feel lucky now"
 }
 
 #######################################
