@@ -27,8 +27,11 @@
 * commit_on_workday: The number of times trying to commit in a work day, must be a factor of 24 
 * commit_on_weekend: The number of times trying to commit in a weekend, must be a factor of 24
 
-
 ### How can I change style of the page ?
 * Modify the `template` file. Don't modify the `index.html`, your changes won't be persisted
 * Make sure the `${XXX}` bash substitution string stay its form
 * Feel free to add .js and .css or other funky business you kids are doing nowadays
+
+### How do I contribute this project ?
+
+You don't. Do something useful instead
