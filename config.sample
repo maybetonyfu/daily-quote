@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Your mashape identity key 
+# Your mashape identity key
 mashape_key="M2IxMGIwMTE0ODk0YzA2NDc3YzcwMjc0YTc1YWNkMzRmNGViNm"
 
 # Categories of quotes. Available: movies/famous
@@ -8,9 +8,9 @@ category="movies"
 
 # A list of commit messages being randomly picked every commit
 commit_messages=(
-    'Update Content'
-    'Bug fix'
-    'New Release'
+    "Update Content"
+    "Bug fix"
+    "New Release"
 )
 
 # The likelihood of proceeding a commit everytime the script being run
