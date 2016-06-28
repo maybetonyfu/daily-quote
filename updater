@@ -39,12 +39,10 @@ test_luck () {
 #   None
 #######################################
 request_random_quote () {
-    local respond_body=(
-        $(curl -X POST "https://andruxnet-random-famous-quotes.p.mashape.com/?cat=${category}" \
+    local respond_body=$(curl -X POST "https://andruxnet-random-famous-quotes.p.mashape.com/?cat=${category}" \
             -H "X-Mashape-Key: ${mashape_key}" \
             -H "Content-Type: application/x-www-form-urlencoded" \
             -H "Accept: application/json")
-    )
 
     quote=$(echo ${respond_body} | jq .quote | tr -d '"')
     author=$(echo ${respond_body} | jq .author | tr -d '"')
