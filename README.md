@@ -10,7 +10,7 @@
 * docker installed on a local machine
 
 ### How to make my own ?
-* Fork this repo
+* Fork and clone this repo
 * Copy the config.sample to a new file named config`cp config.sample config`
 * Create an ssh key pair (or use an exsting one), add the public key to your github account and private key to your repo (The git ignore file will ignore .pri, .key and .epk, if yours is otherwise or doesn't have an extension please change to one of these)
 * Modify the config file, make sure your mashape identity key and github credential are correct (Note: don't modify config.sample. It won't work plus your private info may compromise)
