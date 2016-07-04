@@ -45,8 +45,8 @@ git config --global user.email ${github_user_email}
 git config --global user.name ${github_user_name}
 
 # Add github.com to knownhosts so it wont prompt when git push
-test -d ${HOME}/.ssh || mkdir ${HOME}/.ssh
-cat <<EOF | tee ${HOME}/.ssh/config >&2
+mkdir -p ${HOME}/.ssh
+cat << EOF > ${HOME}/.ssh/config 
 Host github.com
     StrictHostKeyChecking no
 EOF
