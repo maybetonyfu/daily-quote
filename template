@@ -2,7 +2,7 @@
 #
 # HTML template for index.html
 
-cat << _EOF_
+cat << EOF
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="quote.css">
@@ -18,4 +18,4 @@ cat << _EOF_
         </div>
     </body>
 </html>
-_EOF_
+EOF
