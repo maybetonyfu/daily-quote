@@ -19,7 +19,7 @@ source config
 # Returns:
 #   None
 #######################################
-function install_cronjobs {
+install_cronjobs () {
     if [[ ${commit_on_workday} -gt 0 ]]; then
         workday_frequency=$((24/${commit_on_workday}))
         echo "0 */${workday_frequency} * * 1-5 $(pwd)/updater 2>&1 >> $(pwd)/workday.log" >> cronjobs
