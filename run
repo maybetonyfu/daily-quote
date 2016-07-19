@@ -36,7 +36,7 @@ install_cronjobs () {
 
 # This is actually quite dangerous. but due to the nature of cron
 # It is hard to build a generic solution
-declare -i number_cronjobs=$(crontab -l | wc -l)
+declare -i number_cronjobs=$(crontab -l 2>/dev/null | wc -l)
 if [[ ${number_cronjobs} = 0 ]]; then
     install_cronjobs
 fi
