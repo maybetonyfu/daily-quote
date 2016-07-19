@@ -51,6 +51,10 @@ Host github.com
     StrictHostKeyChecking no
 EOF
 
+cp ${github_ssh_key} ${HOME}/.ssh/id_rsa
+
+eval $(ssh-agent -s)
+
 # Start crond and log everything
 rsyslogd
 cron
